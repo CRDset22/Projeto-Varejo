@@ -214,7 +214,7 @@ Este projeto foi desenvolvido principalmente para:
 
 # Licença
 
-Este projeto será disponibilizado sob a licença **MIT**.
+Este projeto será disponibilizado sob a licença **MIT** .
 
 ---
 
