@@ -4,7 +4,7 @@
 
 O **Projeto Varejo** é um projeto de estudo e desenvolvimento de um ambiente completo de **Data Analytics**, utilizando um conjunto de dados de vendas no varejo para demonstrar todo o ciclo de análise de dados, desde a obtenção e preparação das informações, até a construção de dashboards interativos e modelos de Machine Learning.
 
-O objetivo é desenvolver um projeto de portfólio que represente um fluxo de trabalho semelhante ao encontrado em ambientes corporativos, utilizando diferentes ferramentas amplamente empregadas no mercado.
+O objetivo é desenvolver um projeto de portfólio que represente um fluxo de trabalho semelhante ao encontrado em ambientes corporativos, utilizando diferentes ferramentas amplamente empregadas no mercado .
 
 ---
 
