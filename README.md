@@ -30,6 +30,7 @@ Este projeto tem como objetivos:
 
 ## Ferramentas
 
+* Jupyter Notebook
 * Microsoft Excel
 * Power BI
 * D3.js
