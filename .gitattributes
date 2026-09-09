@@ -1,0 +1,17 @@
+# Normaliza tudo para LF no repositório
+* text=auto eol=lf
+
+# Scripts que só rodam no Windows precisam de CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binários: o Git não deve tocar nesses arquivos
+*.xlsx  binary
+*.xlsm  binary
+*.pbix  binary
+*.parquet binary
+*.png   binary
+*.jpg   binary
+*.pdf   binary
+*.docx  binary
