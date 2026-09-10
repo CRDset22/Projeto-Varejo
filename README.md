@@ -107,6 +107,9 @@ Projeto-Varejo/
 │
 ├── assets/
 │
+├── .gitattributes
+├── .editorconfig
+├── .gitignore
 ├── README.md
 ├── LICENSE
 └── requirements.txt
@@ -146,13 +149,13 @@ O dataset representa operações comerciais contendo informações como:
 * descontos
 * valor total
 
-O conjunto de dados será mantido em sua versão original na pasta **data/raw**, preservando sua integridade durante todo o projeto.
+O conjunto de dados é mantido em sua versão original na pasta **data/raw**, com integridade verificável pelo hash SHA-256 registrado em `docs/manifesto.txt`.
 
 ---
 
 # Entregáveis
 
-Ao longo do desenvolvimento serão produzidos:
+O projeto produz os seguintes artefatos:
 
 * Notebooks Jupyter
 * Scripts Python
