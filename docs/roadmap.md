@@ -1,4 +1,4 @@
-# Roadmap — Projeto Varejo
+# Roadmap — Projeto Varejo.
 
 ## Fase 1 — Estrutura do Projeto
 
