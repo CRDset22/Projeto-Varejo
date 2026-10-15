@@ -12,7 +12,7 @@
 
 ############################################################
 
-**pycache**/
+__pycache__/
 *.py[cod]
 *$py.class
 
@@ -39,6 +39,8 @@ develop-eggs/
 .eggs/
 lib/
 lib64/
+# Exceção: biblioteca D3 usada offline pelo dashboard (lib/ acima a ignoraria)
+!dashboards/d3js/lib/
 parts/
 sdist/
 share/python-wheels/
@@ -78,6 +80,7 @@ conda-meta/
 ############################################################
 
 .ipynb_checkpoints/
+.virtual_documents/
 
 ############################################################
 
@@ -195,6 +198,9 @@ temp/
 
 Thumbs.db
 Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
 
 ############################################################
 
@@ -214,12 +220,16 @@ Desktop.ini
 
 ############################################################
 
-# EXCEL TEMP
+# OFFICE TEMP (Excel, Word e PowerPoint)
 
 ############################################################
 
 ~$*.xlsx
 ~$*.xls
+~$*.xlsm
+~$*.docx
+~$*.doc
+~$*.pptx
 
 ############################################################
 
@@ -230,6 +240,10 @@ Desktop.ini
 *.pbix.autosave
 *.pbix.tmp
 *.tmp.pbix
+
+# Projetos .pbip: cache e configurações locais
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
 
 ############################################################
 
@@ -388,10 +402,27 @@ Icon?
 
 ############################################################
 
-# ARQUIVOS PYTHON ESPECÍFICO
+# ARQUIVOS PYTHON ESPECÍFICOS
+
+############################################################
 
 criar_estrutura.py
 
 ############################################################
 
-*.mid5
+# CHECKSUMS
+
+############################################################
+
+*.md5
+
+############################################################
+
+# CLAUDE
+
+############################################################
+
+# CLAUDE.md É versionado: contexto do projeto para o assistente.
+# As variantes locais guardam preferências pessoais e ficam fora.
+CLAUDE.local.md
+.claude/settings.local.json
