@@ -1,0 +1,254 @@
+╔════════════════════════════════════════════════════════════════╗
+║          LOG DE LIMPEZA — PROJETO VAREJO · 03-diagnostico      ║
+╚════════════════════════════════════════════════════════════════╝
+
+Data/hora      : 16/10/2026 23:42:49
+Sistema        : Windows 10
+Python/pandas  : 3.12.7 / 2.2.2
+Arquivo bruto  : data/raw/varejo.csv
+SHA-256        : 446a6b0baefb04d93532ffbe5f86098cde09d68af1db152c8f4ba61c783796c7
+
+FASES EXECUTADAS:
+  ✅ Fase 1: Diagnóstico Inicial
+  ✅ Fase 2: Tratamento de Nulos
+  ✅ Fase 3: Tratamento de Datas
+  ✅ Fase 4: Limpeza de Texto
+  ✅ Fase 5: Validação Numérica
+  ✅ Fase 6: Validação de IDs
+  ✅ Fase 7: Tratamento de Duplicatas
+  ✅ Fase 8: Reindexação
+  ✅ Fase 9: Validação Final
+  ✅ Fase 10: Salvamento
+
+STATUS DOS SUB-PASSOS:
+  ✅ executados como no roteiro : 123
+  ⚙️ executados com ajuste       : 20
+  ⛔ não aplicados               : 4
+  ➕ acrescentados               : 10
+
+ESTATÍSTICAS FINAIS:
+  - Total de linhas : 1000 (original: 1000, removidas: 0)
+  - Total de colunas: 17
+  - Nulos totais    : 0
+  - Duplicatas      : 0
+  - Valor total     : R$ 109.344,37
+
+ORIGEM DOS VALORES:
+  - preco_unit   : {'original': 739, 'reconstruido': 191, 'derivado_imputacao': 69, 'corrigido_decimal': 1}
+  - desconto_pct : {'original': 738, 'reconstruido': 193, 'imputado_mediana': 69}
+  - valor_total  : {'original': 994, 'corrigido_decimal': 6}
+
+ARQUIVOS GERADOS:
+  - data/interim/varejo_original_backup.csv
+  - data/processed/varejo_limpo.csv
+  - data/processed/varejo_limpo.xlsx
+  - data/processed/varejo_limpo.parquet
+  - docs/log_limpeza.txt
+
+REGISTRO DE PASSOS:
+  [1.1.1   ] ✅ dimensões verificadas
+               1000 linhas × 10 colunas
+  [1.1.2   ] ✅ tipos verificados
+               colunas numéricas lidas como texto: ['preco_unit', 'desconto_pct']
+  [1.1.3   ] ✅ memória verificada
+               381.1 KB
+  [1.2.1   ] ✅ nulos contados (leitura padrão)
+               total aparente: 849
+  [1.2.2   ] ✅ percentual de nulos calculado
+  [1.2.3   ] ✅ colunas com mais de 50% de nulos
+               []
+  [1.2.4   ] ⚙️ padrão de nulos visualizado
+               tabela booleana substituída por mapa visual
+  [1.3.1   ] ✅ duplicatas completas
+  [1.3.2   ] ✅ duplicatas por id_venda
+  [1.3.3   ] ✅ resumo estatístico
+               colunas resumidas: ['id_venda', 'quantidade', 'valor_total']
+  [1.3.4   ] ✅ informações gerais
+  [1.4     ] ➕ ausências ocultas identificadas — afetados: 149
+               marcadores que a leitura padrão trata como texto
+  [1.4     ] ➕ formatos de data e grafias inventariados
+               datas: {'AAAA-MM-DD': 913, 'DD/MM/AAAA': 87}
+  [2.0.1   ] ➕ df reiniciado a partir da leitura controlada
+               a leitura padrão da Fase 1 serviu apenas para o diagnóstico
+  [2.0.2   ] ➕ marcadores e células vazias convertidos em nulo — afetados: 998
+  [2.0.3   ] ➕ colunas numéricas convertidas
+               falhas de conversão: 0
+  [2.0.4   ] ➕ vírgula decimal deslocada corrigida — afetados: 7
+               ids [3, 76, 168, 391, 470, 492, 776]
+  [2.1.1   ] ✅ nulos em preco_unit — afetados: 260
+               inclui marcadores convertidos em [2.0.2]
+  [2.1.2   ] ✅ preco_unit convertido para float
+               idempotente após [2.0.3]
+  [2.1.3   ] ✅ média de preco_unit calculada
+               média 43.65
+  [2.1.4   ] ⛔ preencher preço pela média
+               demonstração: 191 linhas violariam a identidade; substituído por reconstrução
+  [2.1.4-A ] ➕ preço reconstruído pela identidade — afetados: 191
+  [2.2.1   ] ✅ nulos em desconto_pct — afetados: 262
+  [2.2.2   ] ✅ desconto_pct convertido para float
+               idempotente após [2.0.3]
+  [2.2.3   ] ✅ mediana de desconto calculada
+               1.90%
+  [2.2.4-A ] ➕ desconto reconstruído pela identidade — afetados: 193
+  [2.2.4   ] ⚙️ desconto restante preenchido pela mediana — afetados: 69
+               sintaxe sem inplace; só onde a identidade não recupera
+  [2.1.4-B ] ➕ preço derivado após imputação do desconto — afetados: 69
+  [2.1.4-C ] ➕ precisão ampliada onde 2 casas não fecham a identidade
+  [2.3.1   ] ✅ nulos em quantidade
+  [2.3.2   ] ✅ quantidades zero ou negativas
+  [2.4.1   ] ✅ nulos em canal — afetados: 233
+               inclui marcadores convertidos em [2.0.2]
+  [2.4.2   ] ✅ valores únicos de canal
+               18 grafias
+  [2.4.3   ] ✅ frequência de canal
+  [2.4.4   ] ⛔ canal ausente rotulado como 'Não informado' — afetados: 233
+               moda distorceria Loja: 44.2% → 57.2%
+  [2.5.1   ] ✅ nulos em uf — afetados: 243
+  [2.5.2   ] ✅ valores únicos de uf
+               32 grafias
+  [2.5.3   ] ✅ frequência de uf
+  [2.5.4   ] ⛔ uf ausente rotulada como 'NI' — afetados: 243
+               moda distorceria SP: 30.0% → 47.0%
+  [2.6.1   ] ✅ nulos em cliente
+  [2.6.2   ] ✅ linhas sem cliente removidas
+  [3.1.1   ] ✅ tipo atual de data
+               object
+  [3.1.2   ] ⚙️ datas convertidas com formato explícito por padrão — afetados: 1000
+               divergência da fórmula do roteiro nesta versão: 0
+  [3.1.3   ] ✅ conversão validada
+               datetime64[ns]
+  [3.2.1   ] ✅ datas nulas após conversão
+  [3.2.2   ] ✅ linhas com data nula removidas
+  [3.2.3   ] ✅ datas futuras
+  [3.2.4   ] ✅ linhas com data futura removidas
+  [3.3.1   ] ✅ coluna mes criada — afetados: 1000
+  [3.3.2   ] ✅ coluna ano criada — afetados: 1000
+  [3.3.3   ] ✅ coluna dia criada — afetados: 1000
+  [3.3.4   ] ⚙️ dia da semana em português — afetados: 1000
+               dicionário fixo em vez de day_name()
+  [3.3.5   ] ✅ componentes de data verificados
+  [4.1.1   ] ✅ clientes com espaço extra — afetados: 33
+  [4.1.2   ] ✅ strip em cliente — afetados: 33
+  [4.1.3   ] ✅ espaços múltiplos reduzidos em cliente
+  [4.1.4   ] ✅ strip em canal — afetados: 20
+  [4.1.5   ] ✅ strip em uf — afetados: 15
+  [4.1.6   ] ✅ strip em categoria — afetados: 29
+  [4.2.1   ] ⚙️ cliente padronizado em maiúsculas (é código, não nome) — afetados: 11
+               distintos: 254 → 245
+  [4.2.2   ] ✅ categoria em formato título — afetados: 17
+               17 grafias → 7 categorias
+  [4.2.3   ] ⚙️ canal em formato título, preservando o rótulo de ausência — afetados: 13
+               11 grafias → 5 valores
+  [4.2.4   ] ✅ uf em maiúsculas — afetados: 16
+               23 grafias → 16 valores
+  [4.2.5   ] ✅ padronização verificada
+  [4.3.1   ] ⚙️ caracteres especiais em cliente (regex com faixa acentuada)
+               expressão do roteiro funcionou nesta versão (0 ocorrências)
+  [4.3.2   ] ⚙️ caracteres indesejáveis removidos de cliente
+  [4.3.3   ] ✅ clientes com dígitos — afetados: 1000
+               todos — o código é numérico por natureza
+  [4.3.4   ] ⛔ remover dígitos de cliente
+               demonstração: 245 clientes colapsariam em 1
+  [4.3.5   ] ✅ caracteres invisíveis removidos de cliente
+  [4.3.6   ] ⚙️ caracteres especiais removidos de categoria (regex com faixa acentuada)
+               regex literal alteraria 0 células
+  [4.3.7   ] ⚙️ caracteres especiais removidos de canal (regex com faixa acentuada)
+               regex literal alteraria 233 células, ex.: ['No informado']
+  [4.3.8   ] ✅ limpeza de texto verificada
+  [5.1.1   ] ✅ quantidades zero
+  [5.1.2   ] ✅ linhas com quantidade zero removidas
+  [5.1.3   ] ✅ quantidades negativas
+  [5.1.4   ] ✅ linhas com quantidade negativa removidas
+  [5.2.1   ] ✅ nulos em preco_unit
+  [5.2.2   ] ✅ preços zero
+  [5.2.3   ] ✅ linhas com preço zero removidas
+  [5.2.4   ] ✅ preços negativos
+  [5.2.5   ] ✅ linhas com preço negativo removidas
+  [5.3.1   ] ✅ nulos em desconto_pct
+  [5.3.2   ] ✅ descontos negativos
+  [5.3.3   ] ✅ descontos acima de 100%
+  [5.3.4   ] ✅ linhas fora de [0, 100] removidas
+  [5.4.1   ] ✅ nulos em valor_total
+  [5.4.2   ] ✅ valores zero
+  [5.4.3   ] ✅ linhas com valor zero removidas
+  [5.4.4   ] ✅ valores negativos
+  [5.4.5   ] ✅ linhas com valor negativo removidas
+  [5.4.6   ] ✅ valor_total_calculado criado — afetados: 1000
+  [5.4.7   ] ✅ discrepâncias na identidade de valor
+               desvio máximo R$ 0.0050
+  [6.1.1   ] ✅ nulos em id_venda
+  [6.1.2   ] ✅ linhas sem id removidas
+  [6.1.3   ] ✅ ids duplicados
+  [6.1.4   ] ✅ ids duplicados listados
+  [6.1.5   ] ✅ ids zero ou negativos
+  [6.1.6   ] ✅ linhas com id inválido removidas
+  [6.2.1   ] ✅ faixa de ids
+               1 a 1000
+  [6.2.2   ] ✅ lacunas na sequência de ids
+  [7.1.1   ] ✅ duplicatas completas
+  [7.1.2   ] ✅ duplicatas completas listadas
+  [7.1.3   ] ✅ duplicatas completas removidas
+  [7.2.1   ] ✅ duplicatas por id_venda
+  [7.2.2   ] ✅ duplicatas por id listadas
+  [7.2.3   ] ✅ duplicatas por id removidas
+  [7.3.1   ] ✅ cliente_norm criado — afetados: 1000
+  [7.3.2   ] ✅ recompras contadas pela fórmula
+               755 recompras; cadastros duplicados reais: 0
+  [7.3.3   ] ✅ clientes recorrentes visualizados
+  [7.3.4   ] ✅ revisão manual — nenhuma remoção
+               recompra não é duplicata
+  [8.1.1   ] ✅ cliente_norm removida
+  [8.1.2   ] ✅ valor_total_calculado removida
+  [8.1.3   ] ✅ dia_semana mantida (usada nos dashboards)
+  [8.1.4   ] ✅ mes, ano e dia mantidas (usadas nos dashboards)
+  [8.1.5   ] ✅ colunas restantes verificadas
+               17 colunas
+  [8.2.1   ] ✅ índice reiniciado
+  [8.2.2   ] ✅ índice validado
+               0 a 999
+  [8.3.1   ] ✅ ordenado por id_venda
+  [8.3.2   ] ✅ ordenação por data — alternativa não executada
+               roteiro oferece 'OU'
+  [8.3.3   ] ✅ ordenação verificada
+  [8.4.1   ] ⚙️ ordem de colunas definida (com dia_semana e origens)
+  [8.4.2   ] ⚙️ ordem aplicada
+  [8.4.3   ] ✅ ordem final verificada
+  [9.1.1   ] ✅ shape final
+               (1000, 17)
+  [9.1.2   ] ✅ comparação com o original
+  [9.1.3   ] ✅ percentual de remoção
+               0.00%
+  [9.2.1   ] ✅ nulos finais por coluna
+  [9.2.2   ] ✅ percentual de nulos final
+  [9.2.3   ] ✅ colunas críticas sem nulos
+  [9.3.1   ] ✅ tipos finais listados
+  [9.3.2   ] ⚙️ tipos validados por família
+  [9.3.3   ] ✅ correção de tipos
+               nenhuma necessária
+  [9.4.1   ] ✅ resumo estatístico final
+  [9.4.2   ] ✅ faixas validadas
+  [9.4.3   ] ✅ distribuições verificadas
+  [9.4.4   ] ⚙️ outliers impossíveis
+               limite absoluto do roteiro + limite relativo por categoria
+  [9.5.1   ] ✅ duplicatas completas finais
+  [9.5.2   ] ✅ duplicatas por id finais
+  [9.5.3   ] ✅ ausência de duplicatas validada
+  [9.6.1   ] ✅ indicador do relatório final
+  [9.6.2   ] ✅ indicador do relatório final
+  [9.6.3   ] ✅ indicador do relatório final
+  [9.6.4   ] ✅ indicador do relatório final
+  [9.6.5   ] ✅ indicador do relatório final
+  [9.6.6   ] ✅ indicador do relatório final
+  [9.6.7   ] ✅ indicador do relatório final
+  [9.6.8   ] ✅ indicador do relatório final
+  [9.6.9   ] ✅ indicador do relatório final
+  [9.6.10  ] ✅ indicador do relatório final
+  [9.6.11  ] ✅ indicador do relatório final
+  [10.1.1  ] ⚙️ backup do original salvo em data/interim
+  [10.1.2  ] ✅ data e hora do backup registradas
+               16/10/2026 23:42:49
+  [10.2.1  ] ⚙️ CSV salvo em data/processed
+  [10.2.2  ] ⚙️ XLSX salvo em data/processed
+  [10.2.3  ] ⚙️ Parquet salvo em data/processed
+  [10.3.1  ] ⚙️ log de limpeza montado
+  [10.3.2  ] ⚙️ log de limpeza salvo em docs
