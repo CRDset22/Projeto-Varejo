@@ -137,7 +137,6 @@ Projeto-Varejo/
 ├── .gitattributes
 ├── .gitignore
 ├── CLAUDE.md
-├── criar_estrutura.py
 ├── environment.yml
 ├── LICENSE
 ├── README.md
@@ -277,11 +276,12 @@ O arquivo contém defeitos inseridos de propósito, para exercitar a limpeza:
 
 ## Base limpa
 
-Após o tratamento, a base mantém as **1.000 vendas** (nenhuma removida), sem valores nulos nem duplicatas. A regra `valor_total = quantidade × preço unitário × (1 − desconto)` passa a valer em todas as linhas.
+Após o tratamento, a base mantém as **1.000 vendas** (nenhuma removida), sem valores nulos nem duplicatas. A regra `valor_total = quantidade × preço unitário × (1 − desconto)` vale em todas as vendas com preço observado.
 
 As principais decisões de tratamento:
 
-* Preços e descontos ausentes são **recalculados a partir da própria venda**, em vez de preenchidos pela média.
+* Preços ausentes recebem a **mediana de preço da própria categoria**, em vez da média geral. As 260 vendas assim tratadas ficam sinalizadas e devem ser excluídas de análises de preço unitário.
+* Descontos ausentes são **recalculados a partir da própria venda** quando o preço é observado; nos demais casos, recebem a mediana.
 * Canal e UF ausentes recebem os rótulos **"Não informado"** e **"NI"**, em vez da categoria mais frequente, que distorceria a participação de cada canal e estado.
 * Os 7 registros com vírgula deslocada são **corrigidos**, não removidos. Sem a correção, o faturamento ficaria inflado em 21,9%.
 * Três colunas de origem (`preco_origem`, `desconto_origem`, `valor_origem`) indicam, em cada linha, se o valor é original, recalculado, estimado ou corrigido.
