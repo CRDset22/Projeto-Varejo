@@ -10,7 +10,7 @@ O objetivo é desenvolver um projeto de portfólio que represente um fluxo de tr
 
 # Objetivos
 
-Este projeto tem como objetivos:
+Este projeto tem como objetivos :
 
 * Praticar técnicas de limpeza e preparação de dados.
 * Realizar Análise Exploratória de Dados (EDA).
