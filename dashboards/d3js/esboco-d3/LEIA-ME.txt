@@ -1,0 +1,78 @@
+ESBOÇO D3 — PROJETO VAREJO
+==========================
+20 perguntas de negócio, uma página por gráfico, com roteamento por "#".
+Mesmas regras e números do esboco-dashboard-excel.xlsx e do 05-esboco-dashboard-python.ipynb.
+Funciona offline: o D3 está em lib/ e os dados em data/dados.js.
+
+
+1. CONTEÚDO DA PASTA
+--------------------
+index.html            página única; abra com duplo clique (não precisa de servidor)
+css/estilo.css        cores (tema claro e escuro), fontes (Arial) e layout
+js/app.js             roteador, menu, montagem das páginas, tabela, "Sua conclusão", tema
+js/graficos.js        GRAFICOS[1] … GRAFICOS[20] — um gráfico por pergunta
+lib/d3.v7.min.js      D3 v7.9.0 (licença ISC em lib/LICENSE-d3.txt)
+data/dados.js         agregados das 20 perguntas (gerado — não edite à mão)
+gerar_dados_d3.py     recalcula data/dados.js a partir do varejo_limpo.parquet
+
+
+2. ROTAS (endereços)
+--------------------
+index.html#/              início: indicadores e índice
+index.html#/p/1 … #/p/20  uma pergunta por página
+index.html#/conferencia   8 indicadores comparados com o Excel
+Setas ← → do teclado trocam de pergunta (fora da caixa de texto).
+
+
+3. ONDE COLOCAR NO PROJETO
+--------------------------
+Windows 10:  C:\Git\Projeto-Varejo\dashboards\d3js\
+Ubuntu:      ~/Projeto-Varejo/dashboards/d3js/   (ou onde estiver o seu clone)
+
+
+4. COMO REGERAR OS DADOS (só quando a base limpa mudar)
+-------------------------------------------------------
+O script procura a base na RAIZ da pasta onde ele está:
+    <pasta>/varejo_limpo.parquet
+    <pasta>/data/processed/varejo_limpo.parquet
+ou no caminho que você passar.
+
+a) Ensaio fora do projeto (mesma pasta do gerar_varejo_limpo.py):
+   Windows:  python gerar_dados_d3.py
+   Ubuntu:   python3 gerar_dados_d3.py
+
+b) Dentro do projeto (a base fica dois níveis acima):
+   Windows (Anaconda Prompt, ambiente varejo ativo):
+       cd C:\Git\Projeto-Varejo\dashboards\d3js
+       python gerar_dados_d3.py ..\..\data\processed\varejo_limpo.parquet
+   Ubuntu:
+       cd ~/Projeto-Varejo/dashboards/d3js
+       python3 gerar_dados_d3.py ../../data/processed/varejo_limpo.parquet
+
+Saída esperada (última linha):  Conferência com o Excel: 8 de 8 indicadores batem
+Depois, recarregue o index.html no navegador (F5).
+
+
+5. GIT
+------
+- O .gitignore já tem a exceção  !dashboards/d3js/lib/  (o D3 local precisa ser versionado).
+- Confira se data/dados.js não está sendo ignorado:
+      git check-ignore -v dashboards/d3js/data/dados.js
+  Sem saída = será versionado (é o que queremos: a página abre sem rodar Python).
+
+
+6. README.md — ONDE, COMO E QUANDO ALTERAR
+------------------------------------------
+QUANDO: no mesmo commit em que a pasta dashboards/d3js/ entrar no repositório.
+ONDE:   seção "Estrutura do projeto", dentro de dashboards/.
+COMO:   acrescente estas linhas:
+
+    dashboards/
+    └── d3js/
+        ├── index.html          ← esboço D3: 20 páginas com roteamento (abre offline)
+        ├── css/ js/ lib/        ← estilo, gráficos (G1–G20) e D3 v7.9.0 local
+        ├── data/dados.js        ← agregados gerados por gerar_dados_d3.py
+        └── gerar_dados_d3.py    ← recalcula data/dados.js a partir da base limpa
+
+Na seção "Como executar", acrescente:
+    Esboço D3: abra dashboards/d3js/index.html no navegador.

@@ -1,0 +1,246 @@
+/* =====================================================================
+   estilo.css — Projeto Varejo · Esboço D3
+   Cores por papel (variáveis CSS): o tema claro e o escuro trocam só aqui.
+   Paleta validada pelo validador da skill de dataviz (claro e escuro).
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. TEMA CLARO (padrão)
+   --------------------------------------------------------------------- */
+:root {                                         /* variáveis valem para a página inteira */
+  color-scheme: light;                          /* controles nativos (barra de rolagem) em tom claro */
+  --pagina: #f9f9f7;                            /* fundo da página */
+  --superficie: #fcfcfb;                        /* fundo dos cartões e gráficos */
+  --texto: #0b0b0b;                             /* tinta principal */
+  --texto-2: #52514e;                           /* tinta secundária */
+  --mudo: #898781;                              /* rótulos de eixo */
+  --grade: #e1e0d9;                             /* linhas de grade */
+  --eixo: #c3c2b7;                              /* linha de base dos eixos */
+  --borda: rgba(11, 11, 11, 0.10);              /* contorno fino dos cartões */
+  --s1: #2a78d6;                                /* série 1 — azul */
+  --s2: #eb6834;                                /* série 2 — laranja */
+  --s3: #1baf7a;                                /* série 3 — água */
+  --s4: #eda100;                                /* série 4 — amarelo */
+  --s5: #e87ba4;                                /* série 5 — magenta */
+  --s6: #008300;                                /* série 6 — verde */
+  --s7: #6250d6;                                /* série 7 — violeta */
+  --cinza: #b4b2a9;                             /* ausência ("Não informado", "NI") */
+  --enfase: #1c5cab;                            /* azul forte (acima da média) */
+  --suave: #9ec5f4;                             /* azul claro (abaixo da média) */
+  --ord1: #0d366b;                              /* rampa ordinal azul — 1º (Campeões) */
+  --ord2: #256abf;                              /* rampa ordinal azul — 2º (Leais) */
+  --ord3: #5598e7;                              /* rampa ordinal azul — 3º (Atenção) */
+  --ord4: #86b6ef;                              /* rampa ordinal azul — 4º (Em risco) */
+  --azul-0: #f3f8fe;                            /* mapa de calor azul — valor baixo */
+  --azul-1: #2a78d6;                            /* mapa de calor azul — valor médio */
+  --azul-2: #0d366b;                            /* mapa de calor azul — valor alto */
+  --laranja-0: #fef3ec;                         /* mapa de calor laranja — valor baixo */
+  --laranja-1: #eb6834;                         /* mapa de calor laranja — valor médio */
+  --laranja-2: #8a3412;                         /* mapa de calor laranja — valor alto */
+  --ok: #006300;                                /* texto de conferência aprovada */
+  --erro: #d03b3b;                              /* texto de conferência reprovada */
+  --destaque: #e8f1fc;                          /* fundo do item ativo no menu */
+}
+
+/* ---------------------------------------------------------------------
+   2. TEMA ESCURO — pelo sistema (se o usuário não escolheu "claro")
+   --------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {           /* o sistema operacional está no modo escuro */
+  :root:not([data-theme="light"]) {             /* ...e o botão não forçou o claro */
+    color-scheme: dark;                         /* controles nativos em tom escuro */
+    --pagina: #0d0d0d;                          /* fundo da página */
+    --superficie: #1a1a19;                      /* fundo dos cartões e gráficos */
+    --texto: #f0efec;                           /* tinta principal */
+    --texto-2: #c3c2b7;                         /* tinta secundária */
+    --mudo: #898781;                            /* rótulos de eixo */
+    --grade: #2c2c2a;                           /* linhas de grade */
+    --eixo: #383835;                            /* linha de base dos eixos */
+    --borda: rgba(255, 255, 255, 0.10);         /* contorno fino */
+    --s1: #3987e5;                              /* série 1 — azul */
+    --s2: #d95926;                              /* série 2 — laranja */
+    --s3: #199e70;                              /* série 3 — água */
+    --s4: #c98500;                              /* série 4 — amarelo */
+    --s5: #d55181;                              /* série 5 — magenta */
+    --s6: #008300;                              /* série 6 — verde */
+    --s7: #9085e9;                              /* série 7 — violeta */
+    --cinza: #6b6a64;                           /* ausência */
+    --enfase: #6da7ec;                          /* azul forte (acima da média) */
+    --suave: #1c5cab;                           /* azul apagado (abaixo da média) */
+    --ord1: #b7d3f6;                            /* rampa ordinal — 1º */
+    --ord2: #6da7ec;                            /* rampa ordinal — 2º */
+    --ord3: #2a78d6;                            /* rampa ordinal — 3º */
+    --ord4: #184f95;                            /* rampa ordinal — 4º */
+    --azul-0: #17263a;                          /* mapa de calor azul — baixo (some no fundo) */
+    --azul-1: #2a78d6;                          /* mapa de calor azul — médio */
+    --azul-2: #b7d3f6;                          /* mapa de calor azul — alto (mais claro) */
+    --laranja-0: #2e1c12;                       /* mapa de calor laranja — baixo */
+    --laranja-1: #d95926;                       /* mapa de calor laranja — médio */
+    --laranja-2: #f8c9ae;                       /* mapa de calor laranja — alto */
+    --ok: #0ca30c;                              /* conferência aprovada */
+    --erro: #e66767;                            /* conferência reprovada */
+    --destaque: #18273b;                        /* item ativo no menu */
+  }
+}
+
+/* ---------------------------------------------------------------------
+   3. TEMA ESCURO — escolhido no botão (vale mesmo com o sistema claro)
+   --------------------------------------------------------------------- */
+:root[data-theme="dark"] {                      /* o botão gravou "escuro" */
+  color-scheme: dark;                           /* mesmas variáveis do bloco 2 */
+  --pagina: #0d0d0d;                            /* fundo da página */
+  --superficie: #1a1a19;                        /* fundo dos cartões */
+  --texto: #f0efec;                             /* tinta principal */
+  --texto-2: #c3c2b7;                           /* tinta secundária */
+  --mudo: #898781;                              /* rótulos de eixo */
+  --grade: #2c2c2a;                             /* grade */
+  --eixo: #383835;                              /* eixo */
+  --borda: rgba(255, 255, 255, 0.10);           /* contorno */
+  --s1: #3987e5;                                /* série 1 */
+  --s2: #d95926;                                /* série 2 */
+  --s3: #199e70;                                /* série 3 */
+  --s4: #c98500;                                /* série 4 */
+  --s5: #d55181;                                /* série 5 */
+  --s6: #008300;                                /* série 6 */
+  --s7: #9085e9;                                /* série 7 */
+  --cinza: #6b6a64;                             /* ausência */
+  --enfase: #6da7ec;                            /* acima da média */
+  --suave: #1c5cab;                             /* abaixo da média */
+  --ord1: #b7d3f6;                              /* ordinal 1º */
+  --ord2: #6da7ec;                              /* ordinal 2º */
+  --ord3: #2a78d6;                              /* ordinal 3º */
+  --ord4: #184f95;                              /* ordinal 4º */
+  --azul-0: #17263a;                            /* calor azul baixo */
+  --azul-1: #2a78d6;                            /* calor azul médio */
+  --azul-2: #b7d3f6;                            /* calor azul alto */
+  --laranja-0: #2e1c12;                         /* calor laranja baixo */
+  --laranja-1: #d95926;                         /* calor laranja médio */
+  --laranja-2: #f8c9ae;                         /* calor laranja alto */
+  --ok: #0ca30c;                                /* aprovado */
+  --erro: #e66767;                              /* reprovado */
+  --destaque: #18273b;                          /* item ativo */
+}
+
+/* ---------------------------------------------------------------------
+   4. ESTRUTURA DA PÁGINA
+   --------------------------------------------------------------------- */
+* { box-sizing: border-box; }                   /* largura inclui borda e espaçamento */
+html, body { margin: 0; }                       /* tira a margem padrão do navegador */
+body {                                          /* corpo da página */
+  background: var(--pagina);                    /* fundo pelo tema */
+  color: var(--texto);                          /* texto pelo tema */
+  font-family: Arial, "Liberation Sans", Helvetica, sans-serif;   /* Arial no Windows; equivalente métrico no Ubuntu */
+  font-size: 15px;                              /* tamanho base */
+  line-height: 1.5;                             /* entrelinha confortável */
+}
+.topo {                                         /* faixa superior fixa */
+  position: sticky; top: 0; z-index: 10;        /* fica no topo ao rolar */
+  display: flex; align-items: center; gap: 12px;   /* itens em linha */
+  padding: 10px 16px;                           /* respiro interno */
+  background: var(--superficie);                /* fundo do cartão */
+  border-bottom: 1px solid var(--borda);        /* linha de separação */
+}
+.topo .marca { font-weight: bold; color: var(--texto); text-decoration: none; }   /* nome do projeto */
+.topo .sub { color: var(--texto-2); font-size: 13px; }   /* subtítulo */
+.topo .espaco { flex: 1; }                      /* empurra os botões para a direita */
+.botao {                                        /* botões do topo e da navegação */
+  font: inherit; font-size: 13px;               /* mesma fonte da página */
+  color: var(--texto); background: transparent; /* cores pelo tema */
+  border: 1px solid var(--borda); border-radius: 6px;   /* contorno arredondado */
+  padding: 5px 10px; cursor: pointer;           /* área de clique */
+  text-decoration: none;                        /* sem sublinhado quando é link */
+}
+.botao:hover { background: var(--destaque); }   /* realce ao passar o mouse */
+.botao[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }   /* anterior/próxima inexistente */
+.grade-pagina {                                 /* menu lateral + conteúdo */
+  display: grid; grid-template-columns: 260px 1fr;   /* duas colunas */
+  min-height: calc(100vh - 50px);               /* ocupa a altura da tela */
+}
+.menu {                                         /* menu lateral */
+  border-right: 1px solid var(--borda);         /* separação do conteúdo */
+  padding: 12px 8px; font-size: 13px;           /* respiro e fonte menor */
+  position: sticky; top: 50px;                  /* acompanha a rolagem */
+  max-height: calc(100vh - 50px); overflow-y: auto;   /* rola sozinho se for longo */
+}
+.menu h2 { font-size: 12px; color: var(--texto-2); margin: 14px 8px 4px; text-transform: uppercase; }   /* nome do bloco */
+.menu a {                                       /* link de cada pergunta */
+  display: block; padding: 4px 8px; border-radius: 4px;   /* área de clique */
+  color: var(--texto); text-decoration: none;   /* sem sublinhado */
+}
+.menu a:hover { background: var(--destaque); }  /* realce ao passar o mouse */
+.menu a.ativo { background: var(--destaque); font-weight: bold; }   /* página atual */
+.conteudo { padding: 20px 24px 60px; max-width: 1100px; width: 100%; }   /* área principal */
+
+/* ---------------------------------------------------------------------
+   5. COMPONENTES DAS PÁGINAS
+   --------------------------------------------------------------------- */
+.trilha { color: var(--texto-2); font-size: 13px; }   /* "Bloco 1 · Pergunta 1 de 20" */
+h1 { font-size: 24px; margin: 4px 0 8px; }      /* título da página */
+.pergunta { font-size: 17px; margin: 0 0 12px; }   /* texto da pergunta */
+.ficha { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px; margin: 0 0 16px; font-size: 14px; }   /* Como ler / Visual / Filtro */
+.ficha dt { color: var(--texto-2); font-weight: bold; }   /* nome do campo */
+.ficha dd { margin: 0; }                        /* valor do campo */
+.cartao {                                       /* moldura do gráfico, da tabela e da conclusão */
+  background: var(--superficie);                /* fundo do tema */
+  border: 1px solid var(--borda); border-radius: 8px;   /* contorno */
+  padding: 14px 16px; margin: 0 0 16px;         /* respiro */
+}
+.cartao h2 { font-size: 15px; margin: 0 0 8px; }   /* título do cartão ("Gráfico G1 — ...") */
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--texto-2); margin: 0 0 6px; }   /* legenda acima do gráfico */
+.legenda span { display: inline-flex; align-items: center; gap: 6px; }   /* item da legenda */
+.legenda i { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }   /* amostra de cor */
+.legenda i.linha { height: 0; border-top: 2px dashed var(--texto-2); border-radius: 0; }   /* amostra de linha tracejada */
+.grafico svg { display: block; width: 100%; height: auto; overflow: visible; }   /* SVG ocupa a largura do cartão */
+.grafico text { fill: var(--texto-2); font-size: 12px; }   /* textos dentro do SVG */
+.grafico .rotulo-forte { fill: var(--texto); font-weight: bold; }   /* rótulos diretos em destaque */
+.grafico .eixo path, .grafico .eixo line { stroke: var(--eixo); }   /* linhas dos eixos */
+.grafico .eixo text { fill: var(--mudo); font-variant-numeric: tabular-nums; }   /* números dos eixos */
+.grafico .grade line { stroke: var(--grade); }  /* linhas de grade */
+.grafico .grade path { display: none; }         /* sem a linha de domínio na grade */
+.grafico .rotulo-ref { fill: var(--texto); stroke: var(--superficie); stroke-width: 4px; paint-order: stroke; stroke-linejoin: round; }   /* rótulo de referência com halo do fundo */
+.grafico .referencia { stroke: var(--texto-2); stroke-dasharray: 5 4; stroke-width: 1.5; }   /* linha de referência tracejada */
+.nota { font-size: 13px; color: var(--texto-2); margin: 6px 0 0; }   /* observação abaixo do gráfico */
+details summary { cursor: pointer; font-weight: bold; }   /* "Ver os dados em tabela" */
+table { border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px; }   /* tabela de dados */
+th, td { padding: 4px 8px; border-bottom: 1px solid var(--grade); text-align: left; }   /* células */
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }   /* números alinhados à direita */
+textarea {                                      /* caixa "Sua conclusão" */
+  width: 100%; min-height: 90px; font: inherit; /* largura total, fonte da página */
+  color: var(--texto); background: var(--pagina);   /* cores pelo tema */
+  border: 1px solid var(--borda); border-radius: 6px; padding: 8px;   /* contorno */
+}
+.navegacao { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; }   /* anterior / índice / próxima */
+.ladrilhos { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 16px; }   /* cartões de indicador */
+.ladrilho { background: var(--superficie); border: 1px solid var(--borda); border-radius: 8px; padding: 12px 14px; }   /* um cartão */
+.ladrilho .rotulo { font-size: 13px; color: var(--texto-2); }   /* nome do indicador */
+.ladrilho .valor { font-size: 28px; font-weight: bold; }   /* número em destaque */
+.ladrilho .detalhe { font-size: 12px; color: var(--texto-2); }   /* explicação curta */
+.indice { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }   /* índice da página inicial */
+.indice ol { margin: 0; padding-left: 22px; }   /* lista numerada de perguntas */
+.indice a { color: var(--texto); }              /* links do índice */
+.ok { color: var(--ok); font-weight: bold; }    /* "✓ confere" */
+.erro { color: var(--erro); font-weight: bold; }   /* "✗ diverge" */
+
+/* ---------------------------------------------------------------------
+   6. DICA (tooltip) — uma só para a página inteira
+   --------------------------------------------------------------------- */
+#dica {                                         /* caixa que segue o mouse */
+  position: fixed; pointer-events: none; z-index: 20;   /* não bloqueia o mouse */
+  background: var(--superficie); color: var(--texto);   /* cores do tema */
+  border: 1px solid var(--borda); border-radius: 6px;   /* contorno */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);    /* sombra leve */
+  padding: 6px 10px; font-size: 13px;           /* respiro */
+  opacity: 0; transition: opacity 0.1s;         /* começa invisível */
+  max-width: 280px;                             /* não cresce demais */
+}
+#dica b { display: block; margin-bottom: 2px; } /* título da dica */
+
+/* ---------------------------------------------------------------------
+   7. TELAS ESTREITAS (celular) — menu vai para cima
+   --------------------------------------------------------------------- */
+@media (max-width: 800px) {                     /* abaixo de 800 px de largura */
+  .grade-pagina { grid-template-columns: 1fr; } /* uma coluna só */
+  .menu { position: static; max-height: 220px; border-right: 0; border-bottom: 1px solid var(--borda); }   /* menu acima do conteúdo */
+  .conteudo { padding: 16px; }                  /* margem lateral de 16 px */
+  .ficha { grid-template-columns: 1fr; }        /* campos empilhados */
+  .topo .sub { display: none; }                 /* esconde o subtítulo */
+}

@@ -1,0 +1,40 @@
+<!doctype html>                                                     <!-- documento HTML5 -->
+<html lang="pt-BR">                                                 <!-- idioma: português do Brasil -->
+<head>                                                              <!-- cabeçalho (não aparece na tela) -->
+  <meta charset="utf-8">                                            <!-- UTF-8: acentos corretos -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">   <!-- escala certa no celular -->
+  <title>Esboço D3 — Projeto Varejo</title>                         <!-- nome na aba do navegador -->
+  <link rel="stylesheet" href="css/estilo.css">                     <!-- cores, fontes e layout -->
+  <script>                                                          /* TEMA SALVO — roda antes de desenhar, evita piscar */
+    try {                                                           /* localStorage pode estar bloqueado */
+      var temaSalvo = localStorage.getItem("varejo-d3-tema");       /* "light", "dark" ou null */
+      if (temaSalvo) document.documentElement.setAttribute("data-theme", temaSalvo);   /* aplica a escolha anterior */
+    } catch (e) {}                                                  /* sem armazenamento: segue o sistema */
+  </script>                                                         <!-- fim do script de tema -->
+</head>                                                             <!-- fim do cabeçalho -->
+<body>                                                              <!-- conteúdo visível -->
+
+  <!-- ============================ TOPO ============================ -->
+  <header class="topo">                                             <!-- faixa superior fixa -->
+    <a class="marca" href="#/">Projeto Varejo · Esboço D3</a>       <!-- volta à página inicial -->
+    <span class="sub">20 perguntas de negócio · base fictícia</span>   <!-- subtítulo -->
+    <span class="espaco"></span>                                    <!-- empurra os botões para a direita -->
+    <a class="botao" href="#/conferencia">Conferência</a>           <!-- página de conferência com o Excel -->
+    <button class="botao" id="botao-tema" type="button">Tema escuro</button>   <!-- alterna claro/escuro -->
+  </header>                                                         <!-- fim do topo -->
+
+  <!-- ===================== MENU + CONTEÚDO ======================== -->
+  <div class="grade-pagina">                                        <!-- duas colunas -->
+    <nav class="menu" id="menu" aria-label="Perguntas"></nav>       <!-- menu lateral (montado pelo app.js) -->
+    <main class="conteudo" id="conteudo" tabindex="-1"></main>      <!-- cada rota é desenhada aqui -->
+  </div>                                                            <!-- fim da grade -->
+
+  <div id="dica" role="tooltip"></div>                              <!-- dica única, reaproveitada por todos os gráficos -->
+
+  <!-- ========================== SCRIPTS =========================== -->
+  <script src="lib/d3.v7.min.js"></script>                          <!-- D3 v7.9.0 local (funciona offline) -->
+  <script src="data/dados.js"></script>                             <!-- window.DADOS, gerado pelo gerar_dados_d3.py -->
+  <script src="js/graficos.js"></script>                            <!-- funções G1 a G20 (um gráfico cada) -->
+  <script src="js/app.js"></script>                                 <!-- roteamento, menu, páginas e tema -->
+</body>                                                             <!-- fim do conteúdo -->
+</html>                                                             <!-- fim do documento -->
